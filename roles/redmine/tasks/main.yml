@@ -1,7 +1,7 @@
 - name: Redmineのソースコードをチェックアウト
   become: yes
-  subversion:
-    repo={{ redmine_svn_url }}
+  git:
+    repo={{ redmica_git_url }}
     dest={{ redmine_dir }}
 
 - name: database.ymlの作成
