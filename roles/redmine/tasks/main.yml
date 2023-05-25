@@ -6,7 +6,7 @@
 
 - name: Redmineのソースコードをチェックアウト
   become: yes
-  ansible.builtin.git:
+  git:
     repo={{ redmine_repo }}
     dest={{ redmine_dir }}
     version='v2.3.0'
