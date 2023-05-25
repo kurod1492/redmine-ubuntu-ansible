@@ -43,6 +43,10 @@
 - name: 作業ディレクトリ作成
   file: path={{ work_dir }} state=directory mode=0755
 
+- name: change /var/www owner
+  become: yes
+  command: chown -R www-data.www-data /var/www
+
 - name: git config
   become: yes
   become_user: www-data
