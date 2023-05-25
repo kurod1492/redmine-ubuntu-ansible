@@ -54,3 +54,12 @@
     name="safe.directory"
     scope=global
     value="/var/lib/redmine"
+
+- name: mkdir /var/lib/redmine
+  become: yes
+  command: mkdir /var/lib/redmine
+
+- name: chown /var/lib/redmine
+  become: yes
+  command: chown -R www-data.www-data /var/lib/redmine
+
