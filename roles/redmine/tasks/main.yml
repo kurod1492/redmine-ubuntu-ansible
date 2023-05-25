@@ -33,7 +33,8 @@
 - name: gemsパッケージのインストール
   become: yes
   command:
-    bundle install --path vendor/bundle
+    bundle config set --local path vendor/bundle
+    bundle install
     chdir={{ redmine_dir }}
   environment:
     PATH: "/usr/local/bin:{{ ansible_env.PATH }}"
