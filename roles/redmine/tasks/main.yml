@@ -40,7 +40,6 @@
     state: present
     chdir:
       - "{{ redmine_dir }}"
-    executable: /usr/local/bin/gem
   when:
     result_test_gemfile.rc == 1
 
