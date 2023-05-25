@@ -49,6 +49,7 @@
 - name: bundlerのインストール
   become: yes
   gem:
-    name=bundler
-  environment:
-    PATH: "/usr/local/bin:{{ ansible_env.PATH }}"
+    name: bundler
+    user_install: no
+    executable: /usr/local/bin/gem
+
