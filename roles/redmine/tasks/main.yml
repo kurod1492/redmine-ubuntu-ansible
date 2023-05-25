@@ -1,8 +1,8 @@
 - name: add /var/lib/redmine to safe directory
-      git_config:
-        name: safe.directory
-        scope: global
-        value: '/var/lib/redmine'
+  git_config:
+    name: safe.directory
+    scope: global
+    value: '/var/lib/redmine'
 
 - name: Redmineのソースコードをチェックアウト
   become: yes
