@@ -35,10 +35,10 @@
 - name: gemsパッケージのインストール
   become: yes
   become_user: www-data
-  command: 
-    bundle config set --local path vendor/bundle && bundle install
-  args:
-    chdir={{ redmine_dir }}
+  community.general.bundler:
+    state: present
+    chdir: 
+      - {{ redmine_dir }}
   environment:
     PATH: "/usr/local/bin:{{ ansible_env.PATH }}"
   when:
