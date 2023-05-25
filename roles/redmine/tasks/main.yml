@@ -32,19 +32,14 @@
   failed_when: result_test_gemfile.rc not in [0, 1]
   changed_when: false
 
-- name: bundle config set --local path vendor/bundle
-  become: yes
-  become_user: www-data
-  command: bundle config set --local path vendor/bundle
-  args: chdir={{ redmine_dir }}
-  environment:
-    PATH: "/usr/local/bin:{{ ansible_env.PATH }}"
-
 - name: gemsパッケージのインストール
   become: yes
   become_user: www-data
-  command: bundle install
-  args: chdir={{ redmine_dir }}
+  command: 
+    bundle config set --local path vendor/bundle
+    bundle install
+  args:
+    chdir={{ redmine_dir }}
   environment:
     PATH: "/usr/local/bin:{{ ansible_env.PATH }}"
   when:
