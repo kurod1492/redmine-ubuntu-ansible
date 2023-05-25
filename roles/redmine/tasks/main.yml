@@ -1,5 +1,6 @@
-- git_config:
-    name=safe.directory
+- name: git config
+  git_config:
+    name="safe.directory"
     scope=global
     value="/var/lib/redmine"
 
