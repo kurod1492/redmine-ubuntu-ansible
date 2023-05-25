@@ -1,10 +1,9 @@
 - name: Redmineのソースコードをチェックアウト
   become: yes
   ansible.builtin.git:
-    repo={{ redmica_git_url }}
+    repo={{ redmine_repo }}
     dest={{ redmine_dir }}
     version='v2.3.0'
-
 
 - name: database.ymlの作成
   become: yes
