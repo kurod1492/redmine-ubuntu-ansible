@@ -42,3 +42,11 @@
 
 - name: 作業ディレクトリ作成
   file: path={{ work_dir }} state=directory mode=0755
+
+- name: git config
+  become: yes
+  become_user: www-data
+  git_config:
+    name="safe.directory"
+    scope=global
+    value="/var/lib/redmine"

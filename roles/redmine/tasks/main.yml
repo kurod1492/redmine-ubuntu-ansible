@@ -1,11 +1,3 @@
-- name: git config
-  become: yes
-  become_user: www-data
-  git_config:
-    name="safe.directory"
-    scope=global
-    value="/var/lib/redmine"
-
 - name: Redmineのソースコードをチェックアウト
   become: yes
   become_user: www-data
