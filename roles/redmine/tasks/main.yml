@@ -35,25 +35,25 @@
 - name: bundle config set —-local path 'vendor/bundle'
   become: yes
   become_user: www-data
-  command: bundle config set —-local path 'vendor/bundle'
-  chdir:
-    - "{{ redmine_dir }}"
+  command:
+    bundle config set —-local path 'vendor/bundle'
+    chdir={{ redmine_dir }}
 
 - name: gemsパッケージのインストール
   become: yes
   become_user: www-data
-  command: bundle install
-  chdir:
-    - "{{ redmine_dir }}"
+  command:
+    bundle install
+    chdir={{ redmine_dir }}
   when:
     result_test_gemfile.rc == 1
 
 - name: gemsパッケージのアップデート
   become: yes
   become_user: www-data
-  command: bundle update
-  chdir:
-    - "{{ redmine_dir }}"
+  command:
+    bundle update
+    chdir={{ redmine_dir }}
   when:
     result_test_gemfile.rc == 0
 
@@ -62,9 +62,8 @@
   become_user: www-data
   command:
     bundle exec rake generate_secret_token
-  chdir: 
-    - "{{ redmine_dir }}"  
-  environment:
+    chdir={{ redmine_dir }}
+    environment:
     RAILS_ENV: production
 
 - name: データベースのマイグレーション
@@ -72,8 +71,7 @@
   become_user: www-data
   command:
     bundle exec rake db:migrate
-  chdir:
-    - "{{ redmine_dir }}"
+    chdir={{ redmine_dir }}
   environment:
     RAILS_ENV: production
 
@@ -82,8 +80,7 @@
   become_user: www-data
   command:
     bundle exec rake redmine:load_default_data
-  chdir:
-    - "{{ redmine_dir }}"
+    chdir={{ redmine_dir }}
   environment:
     RAILS_ENV: production
     REDMINE_LANG: ja
@@ -102,8 +99,7 @@
   become_user: www-data
   command:
     bundle exec rails r 'Setting["ui_theme"]="farend_basic"'
-  chdir:
-    - "{{ redmine_dir }}"
+    chdir={{ redmine_dir }}
   environment:
     RAILS_ENV: production
   when:
@@ -114,8 +110,7 @@
   become_user: www-data
   command:
     bundle exec rails r 'Setting["default_language"]="ja"'
-  chdir:
-    - "{{ redmine_dir }}"
+    chdir={{ redmine_dir }}
   environment:
     RAILS_ENV: production
   when:
@@ -126,8 +121,7 @@
   become_user: www-data
   command:
     bundle exec rails r 'Setting["user_format"]=:lastname_firstname'
-  chdir:
-    - "{{ redmine_dir }}"
+    chdir={{ redmine_dir }}
   environment:
     RAILS_ENV: production
   when:
@@ -138,8 +132,7 @@
   become_user: www-data
   command:
     bundle exec rails r 'Setting["repositories_encodings"]="UTF-8,CP932,EUC-JP"'
-  chdir:
-    - "{{ redmine_dir }}"
+    chdir={{ redmine_dir }}
   environment:
     PATH: "/usr/local/bin:{{ ansible_env.PATH }}"
     RAILS_ENV: production
@@ -151,8 +144,7 @@
   become_user: www-data
   command:
     bundle exec rails r 'Setting["thumbnails_enabled"]="1"'
-  chdir:
-    - "{{ redmine_dir }}"
+    chdir={{ redmine_dir }}
   environment:
     PATH: "/usr/local/bin:{{ ansible_env.PATH }}"
     RAILS_ENV: production
