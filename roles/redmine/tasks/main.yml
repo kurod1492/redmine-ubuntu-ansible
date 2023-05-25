@@ -32,16 +32,8 @@
   failed_when: result_test_gemfile.rc not in [0, 1]
   changed_when: false
 
-- name: bundle config set —-local path 'vendor/bundle'
-  become: yes
-  become_user: www-data
-  command:
-    bundle config set —-local path 'vendor/bundle'
-    chdir={{ redmine_dir }}
-
 - name: gemsパッケージのインストール
   become: yes
-  become_user: www-data
   command:
     bundle install
     chdir={{ redmine_dir }}
@@ -50,7 +42,6 @@
 
 - name: gemsパッケージのアップデート
   become: yes
-  become_user: www-data
   command:
     bundle update
     chdir={{ redmine_dir }}
@@ -59,7 +50,6 @@
 
 - name: secret tokenの作成
   become: yes
-  become_user: www-data
   command:
     bundle exec rake generate_secret_token
     chdir={{ redmine_dir }}
