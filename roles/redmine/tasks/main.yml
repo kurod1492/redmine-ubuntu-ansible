@@ -64,7 +64,7 @@
     bundle exec rake generate_secret_token
   chdir: 
     - "{{ redmine_dir }}"  
-environment:
+  environment:
     RAILS_ENV: production
 
 - name: データベースのマイグレーション
