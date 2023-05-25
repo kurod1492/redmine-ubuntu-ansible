@@ -36,11 +36,11 @@
   become: yes
   become_user: www-data
   community.general.bundler:
+    deployment_mode: yes
     state: present
     chdir:
       - "{{ redmine_dir }}"
-  environment:
-    PATH: "/usr/local/bin:{{ ansible_env.PATH }}"
+    executable: /usr/local/bin/gem
   when:
     result_test_gemfile.rc == 1
 
