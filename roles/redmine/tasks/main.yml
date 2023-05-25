@@ -37,7 +37,7 @@
   become_user: www-data
   command: bundle config set --local path vendor/bundle
     args:
-      chdir={{ redmine_dir }}
+      chdir: {{ redmine_dir }}
   environment:
     PATH: "/usr/local/bin:{{ ansible_env.PATH }}"
 
@@ -47,7 +47,7 @@
   command:
     bundle install
   args:
-    chdir={{ redmine_dir }}
+    chdir: {{ redmine_dir }}
   environment:
     PATH: "/usr/local/bin:{{ ansible_env.PATH }}"
   when:
