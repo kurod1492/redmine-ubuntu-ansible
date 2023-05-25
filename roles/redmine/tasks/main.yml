@@ -3,7 +3,7 @@
   ansible.builtin.git:
     repo={{ redmica_git_url }}
     dest={{ red3mine_dir }}
-    version: v2.3.0
+    version='v2.3.0'
 
 
 - name: database.ymlの作成
