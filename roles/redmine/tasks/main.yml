@@ -37,7 +37,8 @@
   become_user: www-data
   community.general.bundler:
     state: present
-    chdir={{ redmine_dir }}
+    chdir:
+      - "{{ redmine_dir }}"
   environment:
     PATH: "/usr/local/bin:{{ ansible_env.PATH }}"
   when:
