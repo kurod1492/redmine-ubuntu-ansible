@@ -36,8 +36,7 @@
   become: yes
   become_user: www-data
   command: 
-    bundle config set --local path vendor/bundle
-    bundle install
+    bundle config set --local path vendor/bundle && bundle install
   args:
     chdir={{ redmine_dir }}
   environment:
