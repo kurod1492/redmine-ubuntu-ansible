@@ -2,7 +2,7 @@
   become: yes
   ansible.builtin.git:
     repo={{ redmica_git_url }}
-    dest={{ red3mine_dir }}
+    dest={{ redmine_dir }}
     version='v2.3.0'
 
 
