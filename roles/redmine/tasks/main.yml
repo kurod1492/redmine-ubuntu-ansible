@@ -54,7 +54,7 @@
   command: bundle update
   chdir:
     - "{{ redmine_dir }}"
-    when:
+  when:
     result_test_gemfile.rc == 0
 
 - name: secret tokenの作成
