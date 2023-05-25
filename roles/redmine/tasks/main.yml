@@ -52,8 +52,8 @@
   become: yes
   become_user: www-data
   command: bundle update
-    chdir:
-      - "{{ redmine_dir }}"
+  chdir:
+    - "{{ redmine_dir }}"
     when:
     result_test_gemfile.rc == 0
 
