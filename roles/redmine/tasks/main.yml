@@ -1,9 +1,3 @@
-- name: git config
-  git_config:
-    name="safe.directory"
-    scope=global
-    value="/var/lib/redmine"
-
 - name: Redmineのソースコードをチェックアウト
   become: yes
   git:
