@@ -72,7 +72,7 @@
   command:
     bundle exec rake db:migrate
     chdir={{ redmine_dir }}
-  environment:ー
+  environment:
     RAILS_ENV: production
 
 - name: デフォルトデータ(日本語)をロード
