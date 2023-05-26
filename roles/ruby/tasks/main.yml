@@ -41,6 +41,7 @@
 
 - name: Rubyのインストール
   become: yes
+  become_method: sudo
   command:
     make install
     chdir={{ work_dir }}/{{ ruby_archive_version }}
@@ -48,8 +49,8 @@
 
 - name: bundlerのインストール
   become: yes
+  become_method: sudo
   gem:
     name: bundler
     user_install: no
     executable: /usr/local/bin/gem
-

@@ -1,6 +1,7 @@
 - name: Redmineのソースコードをチェックアウト
   become: yes
   become_user: www-data
+  become_method: sudo
   git:
     repo={{ redmine_repo }}
     dest={{ redmine_dir }}
@@ -9,6 +10,7 @@
 - name: database.ymlの作成
   become: yes
   become_user: www-data
+  become_method: sudo
   template:
     src=database.yml
     dest={{ redmine_dir }}/config/database.yml
@@ -19,6 +21,7 @@
 - name: configuration.ymlの作成
   become: yes
   become_user: www-data
+  become_method: sudo
   template:
     src=configuration.yml
     dest={{ redmine_dir }}/config/configuration.yml
@@ -44,6 +47,8 @@
 
 - name: gemsパッケージのアップデート
   become: yes
+  become_user: www-data
+  become_method: sudo
   command:
     bundle update
     chdir={{ redmine_dir }}
@@ -52,6 +57,8 @@
 
 - name: secret tokenの作成
   become: yes
+  become_user: www-data
+  become_method: sudo
   command:
     bundle exec rake generate_secret_token
     chdir={{ redmine_dir }}
@@ -61,15 +68,17 @@
 - name: データベースのマイグレーション
   become: yes
   become_user: www-data
+  become_method: sudo
   command:
     bundle exec rake db:migrate
     chdir={{ redmine_dir }}
-  environment:
+  environment:ー
     RAILS_ENV: production
 
 - name: デフォルトデータ(日本語)をロード
   become: yes
   become_user: www-data
+  become_method: sudo
   command:
     bundle exec rake redmine:load_default_data
     chdir={{ redmine_dir }}
@@ -82,6 +91,7 @@
 - name: farend_basicテーマのダウンロード
   become: yes
   become_user: www-data
+  become_method: sudo
   git:
     repo=https://github.com/farend/redmine_theme_farend_basic.git
     dest={{ redmine_dir }}/public/themes/farend_basic
@@ -89,6 +99,7 @@
 - name: テーマをfarend_basicに切り替え
   become: yes
   become_user: www-data
+  become_method: sudo
   command:
     bundle exec rails r 'Setting["ui_theme"]="farend_basic"'
     chdir={{ redmine_dir }}
@@ -100,6 +111,7 @@
 - name: デフォルトの言語を日本語に変更
   become: yes
   become_user: www-data
+  become_method: sudo
   command:
     bundle exec rails r 'Setting["default_language"]="ja"'
     chdir={{ redmine_dir }}
@@ -111,6 +123,7 @@
 - name: ユーザー名の表示形式を「姓 名」に変更
   become: yes
   become_user: www-data
+  become_method: sudo
   command:
     bundle exec rails r 'Setting["user_format"]=:lastname_firstname'
     chdir={{ redmine_dir }}
@@ -122,6 +135,7 @@
 - name: 添付ファイルとリポジトリのエンコーディングを設定
   become: yes
   become_user: www-data
+  become_method: sudo
   command:
     bundle exec rails r 'Setting["repositories_encodings"]="UTF-8,CP932,EUC-JP"'
     chdir={{ redmine_dir }}
@@ -134,6 +148,7 @@
 - name: 添付ファイルのサムネイルを表示
   become: yes
   become_user: www-data
+  become_method: sudo
   command:
     bundle exec rails r 'Setting["thumbnails_enabled"]="1"'
     chdir={{ redmine_dir }}

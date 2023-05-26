@@ -1,5 +1,6 @@
 - name: Redmineディレクトリ以下のオーナーを変更
   become: yes
+  become_method: sudo
   file:
     path: "{{ redmine_dir }}"
     owner: "{{ redmine_dir_owner }}"
@@ -16,6 +17,7 @@
 
 - name: Passengerをインストール
   become: yes
+  become_method: sudo
   gem:
     name=passenger
     user_install=no
@@ -25,6 +27,7 @@
 
 - name: PassengerのApache用モジュールのインストール
   become: yes
+  become_method: sudo
   command:
     passenger-install-apache2-module --auto --languages ruby
   environment:
@@ -42,18 +45,20 @@
 
 - name: redmine.confの作成
   become: yes
+  become_method: sudo
   template:
     src=redmine.conf
     dest=/etc/apache2/conf-available/redmine.conf
 
 - name: Redmine用のApacheの設定を有効にする
   become: yes
+  become_method: sudo
   command:
     a2enconf redmine
 
 - name: Apacheの再起動
   become: yes
-  service:
+ service:
     name=apache2
     state=restarted
     enabled=yes
