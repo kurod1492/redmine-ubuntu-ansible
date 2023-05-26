@@ -19,9 +19,9 @@
   become: yes
   become_method: sudo
   gem:
-    name=passenger
-    user_install=no
-  executable: /usr/local/bin/gem
+    name: passenger
+    user_install: no
+    executable: /usr/local/bin/gem
   when: result.rc == 1
 
 - name: PassengerのApache用モジュールのインストール
