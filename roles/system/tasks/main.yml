@@ -43,22 +43,3 @@
 - name: 作業ディレクトリ作成
   file: path={{ work_dir }} state=directory mode=0755
 
-- name: change /var/www owner
-  become: yes
-  command: chown -R www-data.www-data /var/www
-
-- name: git config
-  become: yes
-  become_user: www-data
-  become_method: sudo
-  command: git config --global --add safe.directory '/var/lib/redmine'
-
-- name: mkdir /var/lib/redmine
-  become: yes
-  become_method: sudo
-  command: mkdir /var/lib/redmine
-
-- name: chown /var/lib/redmine
-  become: yes
-  become_method: sudo
-  command: chown -R www-data.www-data /var/lib/redmine

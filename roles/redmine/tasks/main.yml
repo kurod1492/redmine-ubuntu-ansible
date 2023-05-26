@@ -1,12 +1,16 @@
 - name: Redmineのソースコードをチェックアウト
   become: yes
-  become_user: www-data
   become_method: sudo
   git:
     repo={{ redmine_repo }}
     dest={{ redmine_dir }}
     version='v2.3.0'
 
+- name: chown /var/lib/redmine
+  become: yes
+  become_method: sudo
+  command: chown -R www-data.www-data /var/lib/redmine
+  
 - name: database.ymlの作成
   become: yes
   become_user: www-data
