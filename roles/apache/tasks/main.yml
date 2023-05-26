@@ -58,7 +58,7 @@
 
 - name: Apacheの再起動
   become: yes
- service:
+  service:
     name=apache2
     state=restarted
     enabled=yes
