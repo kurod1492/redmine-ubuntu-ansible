@@ -39,19 +39,11 @@
   failed_when: result_test_gemfile.rc not in [0, 1]
   changed_when: false
 
-- name: bundle config set —-local path 'vendor/bundle'
-  become: yes
-  become_user: www-data
-  command:
-    bundle config set —-local path 'vendor/bundle'
-    chdir={{ redmine_dir }}
-
 - name: gemsパッケージのインストール
   become: yes
-  become_user: www-data
   become_method: sudo
   command:
-    bundle install
+    bundle install --without development test
     chdir={{ redmine_dir }}
   when:
     result_test_gemfile.rc == 1
