@@ -21,8 +21,7 @@
   gem:
     name=passenger
     user_install=no
-  environment:
-    PATH: "/usr/local/bin:{{ ansible_env.PATH }}"
+  executable: /usr/local/bin/gem
   when: result.rc == 1
 
 - name: PassengerのApache用モジュールのインストール
